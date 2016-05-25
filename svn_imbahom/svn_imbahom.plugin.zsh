@@ -11,13 +11,13 @@ function svnaquest(){
     svn status | awk '{if($1=="?") print$2}' | xargs svn add
 }
 function svncm(){
-    svn ci -m "" `svn status | awk '{if($1=="M") print$2}'`
+    svn ci -m $1 `svn status | awk '{if($1=="M") print$2}'`
 }
 function svnca(){
-    svn ci -m "" `svn status | awk '{if($1=="A") print$2}'`
+    svn ci -m $1 `svn status | awk '{if($1=="A") print$2}'`
 }
 function svncd(){
-    svn ci -m "" `svn status | awk '{if($1=="D") print$2}'`
+    svn ci -m $1 `svn status | awk '{if($1=="D") print$2}'`
 }
 function svnrevert(){
     svn status | awk '{if($1=="M") print$2}' | xargs svn revert
