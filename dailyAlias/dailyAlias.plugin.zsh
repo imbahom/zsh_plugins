@@ -17,7 +17,7 @@ function makeKindleBook(){
         echo "processing "$htmlfile
         basefilename=$(basename $htmlfile)
         suffix=${basefilename##*.}
-        if [[ $suffix == "html" ]]; then
+        if [[ $suffix == "html" || $suffix == "htm" ]]; then
             # echo 'kindlegen ' $htmlfile
             $genCmd $htmlfile
         elif [[ $suffix == $basefilename ]]; then
