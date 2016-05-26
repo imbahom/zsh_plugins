@@ -8,25 +8,29 @@ function readLuaSrc(){
 
 function makeKindleBook(){
     html=$1
-    file=$2
+    removeAfterGen=$2
     pid=$$
+    genCmd="kindlegen -verbose"
     (mkdir -p /tmp/$pid  && cd /tmp/$pid && wget -p -k $html)
     
     for htmlfile in `find /tmp/$pid -type f | xargs file | grep HTML | cut -d : -f 1`; do
+        echo "processing "$htmlfile
         basefilename=$(basename $htmlfile)
         suffix=${basefilename##*.}
         if [[ $suffix == "html" ]]; then
             # echo 'kindlegen ' $htmlfile
-            kindlegen -verbose $htmlfile
-        elif [[ $suffix == "" ]]; then
+            $genCmd $htmlfile
+        elif [[ $suffix == $basefilename ]]; then
             newfile=$htmlfile".html"
             cp $htmlfile $newfile
             # echo 'kindlegen ' $newfile
-            kindlegen -verbose $newfile
+            $genCmd $newfile
         fi
     done
     find /tmp/$pid -name "*.mobi" -exec mv -v {} $KINDLE_BOOKS/mobis \;
-    rm -fr /tmp/$pid
+    if [[ $removeAfterGen == "true" ]]; then
+        rm -fr /tmp/$pid
+    fi
 }
 
 alias tma="tmux attach"
