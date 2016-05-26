@@ -1,3 +1,6 @@
+function makeVimwiki(){
+    (cd ~/vimwiki && make)
+}
 
 function readLuaSrc(){
     (cd $CODE/lua-5.1.4 && mvim **/*.c */*.h)
