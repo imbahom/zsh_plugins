@@ -1,3 +1,7 @@
+function periodik(){
+    sudo periodic daily weekly monthly
+}
+
 function makeVimwiki(){
     (cd ~/vimwiki && make)
 }
@@ -35,4 +39,5 @@ function readLuaSrc(){
 
 alias tma="tmux attach"
 alias myscp='rsync --progress --partial --av'
+alias timestamp='date +%s'
 # alias netspeed="vnstat -l -i en0"
