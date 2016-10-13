@@ -5,7 +5,7 @@ function svndquest(){
     svn status | awk '{if($1=="?") print$2}' | xargs rm -fr
 }
 function svndbang(){
-    svn status | awk '{if($1=="!") print$2}' | xargs svn delete
+    svn status | awk '{if($1=="!" || $1=="!M") print$2}' | xargs svn delete
 }
 function svnaquest(){
     svn status | awk '{if($1=="?") print$2}' | xargs svn add

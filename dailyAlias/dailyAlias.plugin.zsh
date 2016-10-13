@@ -38,6 +38,10 @@ function readLuaSrc(){
 # }
 
 alias tma="tmux attach"
-alias myscp='rsync --progress --partial --av'
+alias myscp='rsync --progress --partial -av'
 alias timestamp='date +%s'
 # alias netspeed="vnstat -l -i en0"
+alias cnpm="npm --registry=https://registry.npm.taobao.org \
+    --cache=$HOME/.npm/.cache/cnpm \
+    --disturl=https://npm.taobao.org/dist \
+    --userconfig=$HOME/.cnpmrc"
