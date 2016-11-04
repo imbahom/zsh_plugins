@@ -41,3 +41,13 @@ function svnresolvedconflict(){
         echo "Dont have any conflicts"
     fi
 }
+
+function svnlog(){
+    if [[ $# == 2 ]]; then
+        svn log -r $1:$2 --diff #--diff-cmd ksdiff
+    elif [[ $# == 1 ]]; then
+        svn log -r $1 --diff #--diff-cmd ksdiff
+    else
+        echo -e "\033[31m" need args:revision number 
+    fi
+}
