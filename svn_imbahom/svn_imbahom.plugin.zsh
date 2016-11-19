@@ -1,6 +1,10 @@
 alias sst="svn st | less"
 alias scm="svn ci -m "
 
+function echoRED(){
+    echo -e "\033[31m" $1
+}
+
 function svndquest(){
     svn status | awk '{if($1=="?") print$2}' | xargs rm -fr
 }
@@ -26,7 +30,7 @@ function svnresolvedconflict(){
     svn status | awk '{if($1=="C") print$2}'
     count=`svn status | awk '{if($1=="C") print$2}' | wc -l`
     if [ $count -ne 0 ];then
-        echo "Did you resolved these conflict? Be Careful!!! (yY/nN)"
+        echoRED "Did you resolved these conflict? Be Careful!!! (yY/nN)"
         read line
         if [ "$line" = Y ] || [ "$line" = y ];then
             svn status | awk '{if($1=="C") print$2}' | xargs svn resolved
@@ -50,7 +54,15 @@ function svnlog(){
     elif [[ $# == 3 ]]; then
         svn log -r $1:$2 --diff $3
     else
-        echo -e "\033[31m" need args:revision number 
+        echoRED "need args:revision number" 
+    fi
+}
+
+function svnignoreEdit(){
+    if [[ $# == 1 ]]; then
+        svn propedit svn:ignore $1
+    else
+        echoRED "need args:dirpath"
     fi
 }
 
