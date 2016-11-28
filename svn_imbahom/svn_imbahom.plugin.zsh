@@ -1,5 +1,5 @@
 alias sst="svn st | less"
-alias scm="svn ci -m "
+alias svneditconfigGlobal="vim ~/.subversion/config"
 
 function echoRED(){
     echo -e "\033[31m" $1
