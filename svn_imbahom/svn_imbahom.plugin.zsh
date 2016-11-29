@@ -23,6 +23,9 @@ function svnca(){
 function svncd(){
     svn ci -m $1 `svn status | awk '{if($1=="D") print$2}'`
 }
+function svncamd(){
+    svn ci -m $1 `svn status | awk '{if($1=="A" || $1=="M" || $1=="D") print$2}'`
+}
 function svnrevert(){
     svn status | awk '{if($1=="M") print$2}' | xargs svn revert
 }
