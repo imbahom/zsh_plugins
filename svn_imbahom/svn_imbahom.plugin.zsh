@@ -6,37 +6,37 @@ function echoRED(){
 }
 
 function svndquest(){
-    svn status | awk '{if($1=="?") print$2}' | xargs rm -fr
+    svn status | awk '{if($1=="?") print$2"@"}' | xargs rm -fr
 }
 function svndbang(){
-    svn status | awk '{if($1=="!" || $1=="!M") print$2}' | xargs svn delete
+    svn status | awk '{if($1=="!" || $1=="!M") print$2"@"}' | xargs svn delete
 }
 function svnaquest(){
-    svn status | awk '{if($1=="?") print$2}' | xargs svn add
+    svn status | awk '{if($1=="?") print$2"@"}' | xargs svn add
 }
 function svncm(){
-    svn ci -m $1 `svn status | awk '{if($1=="M") print$2}'`
+    svn ci -m $1 `svn status | awk '{if($1=="M") print$2"@"}'`
 }
 function svnca(){
-    svn ci -m $1 `svn status | awk '{if($1=="A") print$2}'`
+    svn ci -m $1 `svn status | awk '{if($1=="A") print$2"@"}'`
 }
 function svncd(){
-    svn ci -m $1 `svn status | awk '{if($1=="D") print$2}'`
+    svn ci -m $1 `svn status | awk '{if($1=="D") print$2"@"}'`
 }
 function svncamd(){
-    svn ci -m $1 `svn status | awk '{if($1=="A" || $1=="M" || $1=="D") print$2}'`
+    svn ci -m $1 `svn status | awk '{if($1=="A" || $1=="M" || $1=="D") print$2"@"}'`
 }
 function svnrevert(){
-    svn status | awk '{if($1=="M") print$2}' | xargs svn revert
+    svn status | awk '{if($1=="M") print$2"@"}' | xargs svn revert
 }
 function svnresolvedconflict(){
-    svn status | awk '{if($1=="C") print$2}'
-    count=`svn status | awk '{if($1=="C") print$2}' | wc -l`
+    svn status | awk '{if($1=="C") print$2"@"}'
+    count=`svn status | awk '{if($1=="C") print$2"@"}' | wc -l`
     if [ $count -ne 0 ];then
         echoRED "Did you resolved these conflict? Be Careful!!! (yY/nN)"
         read line
         if [ "$line" = Y ] || [ "$line" = y ];then
-            svn status | awk '{if($1=="C") print$2}' | xargs svn resolved
+            svn status | awk '{if($1=="C") print$2"@"}' | xargs svn resolved
         elif [ "$line" = N ] || [ "$line" = n ];then
             echo "operate canceled"
             return

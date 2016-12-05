@@ -37,6 +37,10 @@ function readLuaSrc(){
     # fi
 # }
 
+function adb_by_packageName(){
+    adb logcat | grep `adb shell ps | grep $1 | cut -c10-15`
+}
+
 alias tma="tmux attach"
 alias myscp='rsync --progress --partial -av'
 alias timestamp='date +%s'
