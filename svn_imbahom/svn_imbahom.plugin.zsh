@@ -2,7 +2,7 @@ alias sst="svn st | less"
 alias svneditconfigGlobal="vim ~/.subversion/config"
 
 function echoRED(){
-    echo -e "\033[31m" $1
+    echo -e "\033[31m"$1"\033[0m"
 }
 
 function svndquest(){
